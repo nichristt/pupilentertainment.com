@@ -46,6 +46,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease; /* Smooth transformation on hover */
+    display: inline-block;
 }
 .content-frame:hover img {
     opacity: 0.8; /* Optional: make the hover image slightly transparent */
@@ -287,3 +288,16 @@ body {
 .links::-webkit-scrollbar-thumb:hover {
     background-color: #888; /* Lighter thumb color on hover */
 }
+
+  #loading-text {
+    font-family: 'Sitka';
+    font-weight: bold;
+    font-size: 25px;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  #gif {
+    display: block;
+    width: 100%; /* Adjust the width as per your requirement */
+  }  
