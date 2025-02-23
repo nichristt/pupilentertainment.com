@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
-    <meta name="description" content="An indie multimedia art studio from Indonesia." />
+    <meta name="description" content="An indie multimedia art studio from Indonesia.">
     <meta name="keywords" content="pupil entertainment, video game, game developer, pupil, horror, narrative, dark">
-
-
+    
     <title>Pupil Entertainment</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -16,21 +15,27 @@
 
 <body>
     <div class="container">
-          
+
         <div class="content-frame">
             <p id="loading-text">Loading...</p>
             <!-- Spotlight -->
-            <a href="https://pupil-entertainment.itch.io/smells-good"><img id="gif" src="assets/images/spotlight.gif" alt="Spotlight" style="display: none;"></a>
+            <a href="https://pupil-entertainment.itch.io/smells-good">
+                <img id="gif" src="assets/images/spotlight.gif" alt="Spotlight" style="display: none;">
+            </a>
         </div>
         
         <div class="library">
             <!-- Archive -->
-            <a href="library.html"><img src="assets/images/Library.png" alt="Library"></a>
+            <a href="library.html">
+                <img src="assets/images/Library.png" alt="Library">
+            </a>
         </div>
         
         <div class="newsletter">
             <!-- Newsletter -->
-            <a href="https://dashboard.mailerlite.com/forms/1092213/131731824093168878/share"><img src="assets/images/Newsletter_Closed.png" alt="Newsletter"></a>
+            <a href="https://dashboard.mailerlite.com/forms/1092213/131731824093168878/share">
+                <img src="assets/images/Newsletter_Closed.png" alt="Newsletter">
+            </a>
         </div>
     </div>
 </body>
@@ -38,20 +43,17 @@
 </html>
 
 <script>
-window.onload = function() {
-  const gif = document.getElementById('gif');
-  const loadingText = document.getElementById('loading-text');
+  window.onload = function() {
+      const gif = document.getElementById('gif');
+      const loadingText = document.getElementById('loading-text');
 
-  // Ensure the GIF is fully loaded before hiding the loading text
-  gif.onload = function() {
-    loadingText.style.display = 'none';  // Hide the loading text once the GIF is loaded
-    gif.style.display = 'block';  // Show the GIF
+      gif.onload = function() {
+          loadingText.style.display = 'none';  // Hide loading text
+          gif.style.display = 'block';  // Show GIF
+      };
+
+      if (gif.complete) {
+          gif.onload(); // Trigger manually if cached
+      }
   };
-
-  // If the GIF is already cached and the onload doesn't trigger, force it to hide immediately
-  if (gif.complete) {
-    gif.onload(); // Manually trigger the onload event
-  }
-};
-
 </script>

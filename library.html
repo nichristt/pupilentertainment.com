@@ -1,35 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
-    <meta name="description" content="Works made by Pupil." />
+    <meta name="description" content="Works made by Pupil.">
     <meta name="keywords" content="pupil entertainment, library, video game, game developer, pupil, horror, narrative, dark">
 
     <title>Library</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
+
 <body>
     <div class="container">
-        <div class="bottom-icons">
-            <div class="back">
-                <a href="/">
-                    <a href="index.html"><img src="assets/images/back.png" alt="Back"></a>
-                </a>
-            </div>
+
+        <div class="back">
+            <a href="index.html">
+                <img src="assets/images/back.png" alt="Back">
+            </a>
+        </div>
             
-            <div class="newsletter">
-                <a href="https://dashboard.mailerlite.com/forms/1092213/131731824093168878/share">
-                    <img src="assets/images/Newsletter_Closed.png" alt="Newsletter">
-                </a>
-            </div>
+        <div class="newsletter">
+            <a href="https://dashboard.mailerlite.com/forms/1092213/131731824093168878/share">
+                <img src="assets/images/Newsletter_Closed.png" alt="Newsletter">
+            </a>
         </div>
 
         <div class="links">
-            <a href="https://pupil-entertainment.itch.io/smells-good" class="game-link"><b>smells good</b> -  (4/2/2024)</a>
+            <span class="game-link" onclick="showOptions('smells good', [
+                { name: 'Direct Download', link: 'https://your-direct-download-link.com' },
+                { name: 'Itch.io', link: 'https://pupil-entertainment.itch.io/smells-good' },
+            ])">
+                <b>smells good</b> - (4/2/2024)
+            </span>
+        </div>
+
+        <!-- Pop-up Menu -->
+        <div id="popup" class="popup">
+            <div id="popup-buttons"></div>
+            <button onclick="closePopup()" id="popup-cancel">Cancel</button>
         </div>
     </div>
 </body>
 </html>
+
+<script>
+        function showOptions(title, options) {
+        let buttonsContainer = document.getElementById("popup-buttons");
+        buttonsContainer.innerHTML = ""; // Clear previous buttons
+
+        options.forEach(option => {
+            let button = document.createElement("button");
+            button.innerText = option.name;
+            button.onclick = function() {
+                window.location.href = option.link;
+            };
+            buttonsContainer.appendChild(button);
+        });
+
+        document.getElementById("popup").style.display = "block";
+
+        // Hide elements
+        document.querySelector(".links").style.display = "none";
+        document.querySelector(".back").style.display = "none";
+        document.querySelector(".newsletter").style.display = "none";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+
+        // Show elements again
+        document.querySelector(".links").style.display = "flex";
+        document.querySelector(".back").style.display = "block";
+        document.querySelector(".newsletter").style.display = "block";
+    }
+</script>
