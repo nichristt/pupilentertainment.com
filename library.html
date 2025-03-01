@@ -4,14 +4,13 @@
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RB06V0DHBJ"></script>
-        <script>
+    <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-RB06V0DHBJ');
     </script>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
@@ -25,13 +24,12 @@
 
 <body>
     <div class="container">
-
         <div class="back">
             <a href="index.html">
                 <img src="assets/images/back.png" alt="Back">
             </a>
         </div>
-            
+
         <div class="newsletter">
             <a href="https://dashboard.mailerlite.com/forms/1092213/131731824093168878/share">
                 <img src="assets/images/Newsletter_Closed.png" alt="Newsletter">
@@ -39,11 +37,14 @@
         </div>
 
         <div class="links">
-            <span class="game-link" onclick="showOptions('smells good', [
-                { name: 'Direct Download', link: 'https://storage.pupilentertainment.com/Smells%20Good%20V1.1%20(PC).zip' },
-                { name: 'Itch.io', link: 'https://pupil-entertainment.itch.io/smells-good' },
+            <span class="game-link" onclick="showOptions([
+                { name: 'Windows (64-bits)', link: 'https://storage.pupilentertainment.com/SMELLS%20GOOD%20-%20Windows%2064-Bits.zip', category: 'Direct Download' },
+                { name: 'Windows (32-bits)', link: 'https://storage.pupilentertainment.com/SMELLS%20GOOD%20-%20Windows%2032-Bits.zip', category: 'Direct Download' },
+                { name: 'Mac', link: 'https://storage.pupilentertainment.com/SMELLS%20GOOD%20-%20MacOS.zip', category: 'Direct Download' },
+                { name: 'Linux', link: 'https://storage.pupilentertainment.com/SMELLS%20GOOD%20-%20Linux.zip', category: 'Direct Download' },
+                { name: 'Itch.io', link: 'https://pupil-entertainment.itch.io/smells-good', category: 'External Platforms' },
             ])">
-                <b>smells good</b> - (4/2/2024)
+                <b>Smells Good</b> - (4/2/2024)
             </span>
         </div>
 
@@ -53,37 +54,58 @@
             <button onclick="closePopup()" id="popup-cancel">Cancel</button>
         </div>
     </div>
+
+    <script>
+        function showOptions(options) {
+            let buttonsContainer = document.getElementById("popup-buttons");
+            buttonsContainer.innerHTML = ""; // Clear previous content
+
+            // Group options by category
+            let groupedOptions = {};
+            options.forEach(option => {
+                if (!groupedOptions[option.category]) {
+                    groupedOptions[option.category] = [];
+                }
+                groupedOptions[option.category].push(option);
+            });
+
+            // Append buttons under their respective categories with spacing
+            for (let category in groupedOptions) {
+                let categorySection = document.createElement("div");
+                categorySection.className = "category-section"; // Adds spacing
+
+                let categoryHeader = document.createElement("h3");
+                categoryHeader.innerText = category;
+                categorySection.appendChild(categoryHeader);
+
+                groupedOptions[category].forEach(option => {
+                    let button = document.createElement("button");
+                    button.innerText = option.name;
+                    button.onclick = function () {
+                        window.location.href = option.link;
+                    };
+                    categorySection.appendChild(button);
+                });
+
+                buttonsContainer.appendChild(categorySection);
+            }
+
+            document.getElementById("popup").style.display = "block";
+
+            // Hide elements
+            document.querySelector(".links").style.display = "none";
+            document.querySelector(".back").style.display = "none";
+            document.querySelector(".newsletter").style.display = "none";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+
+            // Show elements again
+            document.querySelector(".links").style.display = "flex";
+            document.querySelector(".back").style.display = "block";
+            document.querySelector(".newsletter").style.display = "block";
+        }
+    </script>
 </body>
 </html>
-
-<script>
-        function showOptions(title, options) {
-        let buttonsContainer = document.getElementById("popup-buttons");
-        buttonsContainer.innerHTML = ""; // Clear previous buttons
-
-        options.forEach(option => {
-            let button = document.createElement("button");
-            button.innerText = option.name;
-            button.onclick = function() {
-                window.location.href = option.link;
-            };
-            buttonsContainer.appendChild(button);
-        });
-
-        document.getElementById("popup").style.display = "block";
-
-        // Hide elements
-        document.querySelector(".links").style.display = "none";
-        document.querySelector(".back").style.display = "none";
-        document.querySelector(".newsletter").style.display = "none";
-    }
-
-    function closePopup() {
-        document.getElementById("popup").style.display = "none";
-
-        // Show elements again
-        document.querySelector(".links").style.display = "flex";
-        document.querySelector(".back").style.display = "block";
-        document.querySelector(".newsletter").style.display = "block";
-    }
-</script>
