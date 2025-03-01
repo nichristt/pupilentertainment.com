@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /
+
+# Force HTTPS (Place this at the top)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect URLs without file extension (e.g., /about → /about.html)
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
