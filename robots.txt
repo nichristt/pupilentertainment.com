@@ -1,3 +1,7 @@
 User-agent: *
-Disallow: /private/
-Allow: /
+Disallow: /newsletter-welcome/
+Disallow: /support-us/
+Allow: /library
+
+# Sitemap location
+Sitemap: https://pupilentertainment.com/sitemap.xml
