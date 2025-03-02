@@ -58,8 +58,8 @@ body {
 }
 
 .content-frame video {
-    width: 100% !important;
-    height: 100% !important;
+    width: 250px !important;
+    height: 190px !important;
     object-fit: cover !important;
 }
 
