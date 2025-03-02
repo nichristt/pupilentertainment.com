@@ -47,7 +47,6 @@ body {
     padding: 10px;
 }
 
-/* Content Frame */
 .content-frame {
     position: relative;
     width: 250px;
@@ -68,14 +67,9 @@ body {
     opacity: 0.8;
 }
 
-/* Loading indicator */
-.loading-indicator {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 16px;
+/* Paused GIF style */
+.paused {
+    animation-play-state: paused !important;
 }
 
 /* Library Component */

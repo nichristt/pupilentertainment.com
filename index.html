@@ -12,11 +12,9 @@
 <body>
     <div class="container">
         <div class="content-frame">
-            <!-- Spotlight with loading indicator -->
+            <!-- Spotlight with paused animation -->
             <a href="https://pupil-entertainment.itch.io/smells-good">
-                <div id="gif-container" style="width: 100%; height: 100%;">
-                    <div id="loading-indicator" class="loading-indicator">Loading...</div>
-                </div>
+                <img id="spotlight-gif" class="paused" src="assets/images/spotlight.gif" alt="Spotlight">
             </a>
         </div>
 
@@ -36,36 +34,25 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const gifContainer = document.getElementById('gif-container');
-        const loadingIndicator = document.getElementById('loading-indicator');
+        const spotlightGif = document.getElementById('spotlight-gif');
         
-        // Define the path to your GIF
-        const gifPath = 'assets/images/spotlight.gif';
+        // Create a new Image object to check when the GIF is fully loaded
+        const preloadGif = new Image();
+        preloadGif.src = spotlightGif.src;
         
-        // Create the GIF image element
-        const gifImage = new Image();
-        gifImage.src = gifPath;
-        gifImage.alt = 'Spotlight';
-        
-        // Apply your css styles programmatically to ensure they're applied
-        gifImage.style.width = '100%';
-        gifImage.style.height = '100%';
-        gifImage.style.objectFit = 'cover';
-        
-        // When the GIF is fully loaded
-        gifImage.onload = function() {
-            // Remove loading indicator
-            loadingIndicator.remove();
-            
-            // Add the GIF to the container
-            gifContainer.appendChild(gifImage);
+        // When the GIF is fully loaded in cache
+        preloadGif.onload = function() {
+            console.log('GIF fully loaded');
+            // Remove the paused class to allow animation
+            setTimeout(function() {
+                spotlightGif.classList.remove('paused');
+            }, 500); // Small delay to ensure it's fully rendered
         };
         
-        // Handle loading errors
-        gifImage.onerror = function() {
-            loadingIndicator.textContent = 'Error loading image';
-            console.error('Failed to load GIF:', gifPath);
-        };
+        // If GIF is already cached
+        if (preloadGif.complete) {
+            preloadGif.onload();
+        }
     });
 </script>
 </html>
