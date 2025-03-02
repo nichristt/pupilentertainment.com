@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RB06V0DHBJ"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-RB06V0DHBJ');
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
@@ -25,22 +14,21 @@
 
 <body>
     <div class="container">
-
         <div class="content-frame">
-            <p id="loading-text">Loading...</p>
             <!-- Spotlight -->
             <a href="https://pupil-entertainment.itch.io/smells-good">
+                <canvas id="gif-canvas"></canvas> <!-- First frame -->
                 <img id="gif" src="assets/images/spotlight.gif" alt="Spotlight" style="display: none;">
             </a>
         </div>
-        
+
         <div class="library">
             <!-- Archive -->
             <a href="library.html">
                 <img src="assets/images/Library.png" alt="Library">
             </a>
         </div>
-        
+
         <div class="newsletter">
             <!-- Newsletter -->
             <a href="https://dashboard.mailerlite.com/forms/1092213/131731824093168878/share">
@@ -48,22 +36,37 @@
             </a>
         </div>
     </div>
+
+    <script>
+        window.onload = function() {
+            const gif = document.getElementById('gif');
+            const canvas = document.getElementById('gif-canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Load the GIF image
+            const img = new Image();
+            img.src = gif.src;
+            img.crossOrigin = "anonymous"; // Prevent CORS issues if needed
+
+            img.onload = function() {
+                // Set canvas size to match GIF
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                // Draw the first frame of the GIF on canvas
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+            };
+
+            gif.onload = function() {
+                // Hide the canvas and show the GIF when fully loaded
+                canvas.style.display = 'none';
+                gif.style.display = 'block';
+            };
+
+            if (gif.complete) {
+                gif.onload(); // Trigger manually if cached
+            }
+        };
+    </script>
 </body>
-
 </html>
-
-<script>
-  window.onload = function() {
-      const gif = document.getElementById('gif');
-      const loadingText = document.getElementById('loading-text');
-
-      gif.onload = function() {
-          loadingText.style.display = 'none';  // Hide loading text
-          gif.style.display = 'block';  // Show GIF
-      };
-
-      if (gif.complete) {
-          gif.onload(); // Trigger manually if cached
-      }
-  };
-</script>

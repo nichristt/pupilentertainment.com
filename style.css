@@ -167,15 +167,6 @@ body {
     color: rgb(168, 166, 166);
 }
 
-/* Loading Text */
-#loading-text {
-    font-family: 'Sitka';
-    font-weight: bold;
-    font-size: 25px;
-    color: #fff;
-    text-align: center;
-}
-
 #gif {
     display: block;
     width: 100%;
