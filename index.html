@@ -12,10 +12,11 @@
 <body>
     <div class="container">
         <div class="content-frame">
-            <!-- Spotlight with GIF preloading -->
-            <a href="https://pupil-entertainment.itch.io/smells-good" id="spotlight-link">
-                <!-- Initially show a static version of the first frame (could be a JPEG/PNG) -->
-                <img id="static-spotlight" src="assets/images/spotlight-static.jpg" alt="Spotlight">
+            <!-- Spotlight with loading indicator -->
+            <a href="https://pupil-entertainment.itch.io/smells-good">
+                <div id="gif-container" style="width: 100%; height: 100%;">
+                    <div id="loading-indicator" class="loading-indicator">Loading...</div>
+                </div>
             </a>
         </div>
 
@@ -35,20 +36,35 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const spotlightLink = document.getElementById('spotlight-link');
-        const staticImage = document.getElementById('static-spotlight');
+        const gifContainer = document.getElementById('gif-container');
+        const loadingIndicator = document.getElementById('loading-indicator');
         
-        // Preload the GIF
-        const animatedGif = new Image();
-        animatedGif.src = 'assets/images/spotlight.gif';
-        animatedGif.id = 'animated-spotlight';
-        animatedGif.alt = 'Spotlight';
+        // Define the path to your GIF
+        const gifPath = 'assets/images/spotlight.gif';
+        
+        // Create the GIF image element
+        const gifImage = new Image();
+        gifImage.src = gifPath;
+        gifImage.alt = 'Spotlight';
+        
+        // Apply your css styles programmatically to ensure they're applied
+        gifImage.style.width = '100%';
+        gifImage.style.height = '100%';
+        gifImage.style.objectFit = 'cover';
         
         // When the GIF is fully loaded
-        animatedGif.onload = function() {
-            // Replace the static image with the animated GIF
-            staticImage.remove();
-            spotlightLink.appendChild(animatedGif);
+        gifImage.onload = function() {
+            // Remove loading indicator
+            loadingIndicator.remove();
+            
+            // Add the GIF to the container
+            gifContainer.appendChild(gifImage);
+        };
+        
+        // Handle loading errors
+        gifImage.onerror = function() {
+            loadingIndicator.textContent = 'Error loading image';
+            console.error('Failed to load GIF:', gifPath);
         };
     });
 </script>
