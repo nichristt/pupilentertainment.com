@@ -17,8 +17,10 @@
         <div class="content-frame">
             <!-- Spotlight -->
             <a href="https://pupil-entertainment.itch.io/smells-good">
-                <img id="first-frame" src="assets/images/spotlight.gif" alt="Spotlight">
-                <img id="gif" src="assets/images/spotlight.gif" alt="Spotlight" style="display: none;">
+                <div class="gif-container">
+                    <img id="placeholder" src="assets/images/spotlight_first_frame.jpg" alt="Spotlight">
+                    <img id="animated-gif" src="assets/images/spotlight.gif" alt="Spotlight" style="opacity: 0;">
+                </div>
             </a>
         </div>
 
@@ -39,20 +41,19 @@
 
     <script>
         window.onload = function() {
-            const gif = document.getElementById('gif');
-            const firstFrame = document.getElementById('first-frame');
-
-            // Freeze GIF at first frame by pausing animation
-            firstFrame.style.animation = 'none';
-
-            gif.onload = function() {
-                // Hide the first frame and show the animated GIF
-                firstFrame.style.display = 'none';
-                gif.style.display = 'block';
+            const animatedGif = document.getElementById('animated-gif');
+            const placeholder = document.getElementById('placeholder');
+            
+            // When the animated GIF is fully loaded
+            animatedGif.onload = function() {
+                // Fade in the animated GIF
+                animatedGif.style.transition = 'opacity 0.3s ease-in-out';
+                animatedGif.style.opacity = '1';
             };
-
-            if (gif.complete) {
-                gif.onload(); // Trigger manually if cached
+            
+            // If GIF is already cached
+            if (animatedGif.complete) {
+                animatedGif.style.opacity = '1';
             }
         };
     </script>

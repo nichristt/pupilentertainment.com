@@ -172,6 +172,21 @@ body {
     width: 100%;
 }
 
+.gif-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.gif-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 /* Custom Scrollbar */
 .links::-webkit-scrollbar {
     width: 15px;
