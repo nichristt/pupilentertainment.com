@@ -61,6 +61,7 @@ body {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
+    display: block !important;
 }
 
 .content-frame:hover video {
