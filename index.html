@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index, follow">
     <meta name="description" content="An indie multimedia art studio from Indonesia.">
-    <meta name="keywords" content="pupil entertainment, video game, game developer, pupil, horror, narrative, dark">
-    
     <title>Pupil Entertainment</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -15,23 +12,20 @@
 <body>
     <div class="container">
         <div class="content-frame">
-            <!-- Spotlight -->
-            <a href="https://pupil-entertainment.itch.io/smells-good">
-                <div id="gif-container" class="gif-container">
-                    <img id="gif" src="assets/images/spotlight.gif" alt="Spotlight" style="display: none;">
-                </div>
+            <!-- Spotlight with GIF preloading -->
+            <a href="https://pupil-entertainment.itch.io/smells-good" id="spotlight-link">
+                <!-- Initially show a static version of the first frame (could be a JPEG/PNG) -->
+                <img id="static-spotlight" src="assets/images/spotlight-static.jpg" alt="Spotlight">
             </a>
         </div>
 
         <div class="library">
-            <!-- Archive -->
             <a href="library.html">
                 <img src="assets/images/Library.png" alt="Library">
             </a>
         </div>
 
         <div class="newsletter">
-            <!-- Newsletter -->
             <a href="https://dashboard.mailerlite.com/forms/1092213/131731824093168878/share">
                 <img src="assets/images/Newsletter_Closed.png" alt="Newsletter">
             </a>
@@ -41,49 +35,20 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const gifContainer = document.getElementById('gif-container');
-        const gif = document.getElementById('gif');
+        const spotlightLink = document.getElementById('spotlight-link');
+        const staticImage = document.getElementById('static-spotlight');
         
-        // Create a new image element for the placeholder
-        const placeholder = new Image();
-        placeholder.src = gif.src; // Use the same GIF path
-        placeholder.id = 'placeholder';
-        placeholder.alt = "Spotlight";
-        placeholder.style.display = 'block'; // Make sure placeholder is visible
+        // Preload the GIF
+        const animatedGif = new Image();
+        animatedGif.src = 'assets/images/spotlight.gif';
+        animatedGif.id = 'animated-spotlight';
+        animatedGif.alt = 'Spotlight';
         
-        // Add the placeholder to the container before the gif
-        gifContainer.insertBefore(placeholder, gif);
-        
-        // Create a canvas to extract the first frame
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        // When placeholder image loads
-        placeholder.onload = function() {
-            // Set canvas dimensions to match the image
-            canvas.width = placeholder.naturalWidth;
-            canvas.height = placeholder.naturalHeight;
-            
-            // Draw the first frame of the GIF on the canvas
-            ctx.drawImage(placeholder, 0, 0);
-            
-            // Replace the placeholder's src with the canvas data
-            // This effectively freezes the GIF at its first frame
-            placeholder.src = canvas.toDataURL('image/png');
-            
-            // Now load the animated GIF
-            gif.style.display = 'none'; // Ensure it's hidden initially
-            
-            // When the full GIF loads, show it and hide the placeholder
-            gif.onload = function() {
-                gif.style.display = 'block';
-                placeholder.style.display = 'none';
-            };
-            
-            // If the GIF is already cached, trigger onload manually
-            if (gif.complete) {
-                gif.onload();
-            }
+        // When the GIF is fully loaded
+        animatedGif.onload = function() {
+            // Replace the static image with the animated GIF
+            staticImage.remove();
+            spotlightLink.appendChild(animatedGif);
         };
     });
 </script>
