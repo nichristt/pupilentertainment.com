@@ -17,9 +17,8 @@
         <div class="content-frame">
             <!-- Spotlight -->
             <a href="https://pupil-entertainment.itch.io/smells-good">
-                <div class="gif-container">
-                    <img id="placeholder" src="assets/images/spotlight_first_frame.jpg" alt="Spotlight">
-                    <img id="animated-gif" src="assets/images/spotlight.gif" alt="Spotlight" style="opacity: 0;">
+                <div id="gif-container" class="gif-container">
+                    <img id="gif" src="assets/images/spotlight.gif" alt="Spotlight" style="display: none;">
                 </div>
             </a>
         </div>
@@ -38,24 +37,54 @@
             </a>
         </div>
     </div>
+</body>
 
-    <script>
-        window.onload = function() {
-            const animatedGif = document.getElementById('animated-gif');
-            const placeholder = document.getElementById('placeholder');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const gifContainer = document.getElementById('gif-container');
+        const gif = document.getElementById('gif');
+        
+        // Create a new image element for the placeholder
+        const placeholder = new Image();
+        placeholder.src = gif.src; // Use the same GIF path
+        placeholder.id = 'placeholder';
+        placeholder.alt = "Spotlight";
+        placeholder.style.display = 'block'; // Make sure placeholder is visible
+        
+        // Add the placeholder to the container before the gif
+        gifContainer.insertBefore(placeholder, gif);
+        
+        // Create a canvas to extract the first frame
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // When placeholder image loads
+        placeholder.onload = function() {
+            // Set canvas dimensions to match the image
+            canvas.width = placeholder.naturalWidth;
+            canvas.height = placeholder.naturalHeight;
             
-            // When the animated GIF is fully loaded
-            animatedGif.onload = function() {
-                // Fade in the animated GIF
-                animatedGif.style.transition = 'opacity 0.3s ease-in-out';
-                animatedGif.style.opacity = '1';
+            // Draw the first frame of the GIF on the canvas
+            ctx.drawImage(placeholder, 0, 0);
+            
+            // Replace the placeholder's src with the canvas data
+            // This effectively freezes the GIF at its first frame
+            placeholder.src = canvas.toDataURL('image/png');
+            
+            // Now load the animated GIF
+            gif.style.display = 'none'; // Ensure it's hidden initially
+            
+            // When the full GIF loads, show it and hide the placeholder
+            gif.onload = function() {
+                gif.style.display = 'block';
+                placeholder.style.display = 'none';
             };
             
-            // If GIF is already cached
-            if (animatedGif.complete) {
-                animatedGif.style.opacity = '1';
+            // If the GIF is already cached, trigger onload manually
+            if (gif.complete) {
+                gif.onload();
             }
         };
-    </script>
-</body>
+    });
+</script>
 </html>
