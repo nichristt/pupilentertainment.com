@@ -12,47 +12,41 @@
 <body>
     <div class="container">
         <div class="content-frame">
-            <!-- Spotlight with paused animation -->
+            <!-- Spotlight -->
             <a href="https://pupil-entertainment.itch.io/smells-good">
-                <img id="spotlight-gif" class="paused" src="assets/images/spotlight.gif" alt="Spotlight">
+                <img src="assets/images/spotlight.gif" alt="Spotlight">
             </a>
         </div>
 
         <div class="library">
+            <!-- Archive -->
             <a href="library.html">
                 <img src="assets/images/Library.png" alt="Library">
             </a>
         </div>
 
         <div class="newsletter">
+            <!-- Newsletter -->
             <a href="https://dashboard.mailerlite.com/forms/1092213/131731824093168878/share">
                 <img src="assets/images/Newsletter_Closed.png" alt="Newsletter">
             </a>
         </div>
     </div>
-</body>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const spotlightGif = document.getElementById('spotlight-gif');
-        
-        // Create a new Image object to check when the GIF is fully loaded
-        const preloadGif = new Image();
-        preloadGif.src = spotlightGif.src;
-        
-        // When the GIF is fully loaded in cache
-        preloadGif.onload = function() {
-            console.log('GIF fully loaded');
-            // Remove the paused class to allow animation
-            setTimeout(function() {
-                spotlightGif.classList.remove('paused');
-            }, 500); // Small delay to ensure it's fully rendered
-        };
-        
-        // If GIF is already cached
-        if (preloadGif.complete) {
-            preloadGif.onload();
-        }
-    });
-</script>
+    <script>
+        // Simple performance optimization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Preload common assets
+            const preloadImages = [
+                'assets/images/Library.png',
+                'assets/images/Newsletter_Closed.png'
+            ];
+            
+            preloadImages.forEach(function(src) {
+                const img = new Image();
+                img.src = src;
+            });
+        });
+    </script>
+</body>
 </html>
