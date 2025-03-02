@@ -14,7 +14,7 @@
         <div class="content-frame">
             <!-- Spotlight -->
             <a href="https://pupil-entertainment.itch.io/smells-good">
-                <img src="assets/images/spotlight.gif" alt="Spotlight">
+                <video src="assets/images/Spotlight.mp4" autoplay loop muted playsinline></video>
             </a>
         </div>
 
@@ -32,21 +32,5 @@
             </a>
         </div>
     </div>
-
-    <script>
-        // Simple performance optimization
-        document.addEventListener('DOMContentLoaded', function() {
-            // Preload common assets
-            const preloadImages = [
-                'assets/images/Library.png',
-                'assets/images/Newsletter_Closed.png'
-            ];
-            
-            preloadImages.forEach(function(src) {
-                const img = new Image();
-                img.src = src;
-            });
-        });
-    </script>
 </body>
 </html>

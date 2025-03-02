@@ -50,20 +50,20 @@ body {
 .content-frame {
     position: relative;
     width: 250px;
-    height: 166px;
+    height: 190px;
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease;
     display: inline-block;
 }
 
-.content-frame img {
+.content-frame video {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.content-frame:hover img {
+.content-frame:hover video {
     opacity: 0.8;
 }
 
